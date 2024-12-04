@@ -53,6 +53,7 @@ export const useEStore = defineStore('todoList', {
           title: "The best Organic Product Online",
           bg: "bg-yellow-300",
           color: "bg-[#E7EAF3]",
+          buy: '1',
     
         },
       ],
@@ -63,6 +64,7 @@ export const useEStore = defineStore('todoList', {
           imageUrl: img1,
           description: '14 items',
           bg: "bg-[#F2FCE4] border-2 hover:border-[#81B13D]",
+          buy: '1',
         },
         {
           id: "2",
