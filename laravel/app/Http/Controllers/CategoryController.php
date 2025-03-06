@@ -26,18 +26,39 @@ class CategoryController extends Controller
     // --- Get /api/categories/{categoryId}
     public function getCategory($categoryId)
     {
-        return ["message" => "Getting 1 category based on given categoryId"];
+        $category = Category::find($categoryId);
+
+        if(!$category){
+            return ["message" => "Can't find this catefory!"];
+        }
+        return $category;
     }
 
     // --- Patch /api/categories/{categoryId}
-    public function updateCategory($categoryId)
+    public function updateCategory(Request $req, $categoryId)
     {
-        return ["message" => "Updating 1 category based on given categoryId"];
+        $category = Category::find($categoryId);
+
+        if(!$category){
+            return ["message" => "Update unsuccessfull!"];
+        }
+
+        $category->name = $req->name;
+        $category->save();
+        return $category;
     }
 
     // --- Delete /api/categories/{categoryId}
     public function deleteCategory($categoryId)
     {
-        return ["message" => "Deleting 1 category based on given categoryId"];
+        $category = Category::find($categoryId);
+
+        if(!$category){
+            return ["message" => "Delete unsuccessfull!"];
+        }
+        
+        $category->delete();
+
+        return ["message" => "Delete successfull!"];
     }
 }
