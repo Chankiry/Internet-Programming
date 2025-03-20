@@ -1,14 +1,19 @@
 FROM php:8.2-fpm
 
-# Install system dependencies
-RUN apt update && apt install -y unzip curl git nodejs npm libzip-dev
+# Ensure sources.list exists and configure repositories
+RUN echo "deb http://deb.debian.org/debian bookworm main" > /etc/apt/sources.list && \
+    echo "deb http://deb.debian.org/debian bookworm-updates main" >> /etc/apt/sources.list && \
+    echo "deb http://security.debian.org/debian-security bookworm-security main" >> /etc/apt/sources.list
 
-# Install PHP extensions
+# Switch to HTTPS and install dependencies
+RUN apt-get clean && \
+    sed -i 's|http://deb.debian.org|https://deb.debian.org|g' /etc/apt/sources.list && \
+    apt-get update && \
+    apt-get install -y --fix-missing unzip curl git nodejs npm libzip-dev && \
+    apt-get clean && \
+    rm -rf /var/lib/apt/lists/*
+
+# Continue with the rest of the Dockerfile
 RUN docker-php-ext-install pdo pdo_mysql zip
-
-# Install Composer
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
-
-# Set working directory
 WORKDIR /var/www
-
