@@ -11,6 +11,7 @@ class Wishlist extends Model
     use HasFactory;
 
     protected $fillable = ['product_id', 'customer_id'];
+    protected $table = 'wishlist';
 
     public function product(): BelongsTo
     {

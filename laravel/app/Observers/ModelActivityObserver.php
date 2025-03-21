@@ -2,7 +2,8 @@
 
 namespace App\Observers;
 
-use App\Models\Order;
+use App\Models\ActivityLog;
+use Illuminate\Database\Eloquent\Model;
 
 class ModelActivityObserver
 {
