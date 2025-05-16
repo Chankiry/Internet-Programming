@@ -33,10 +33,7 @@
                 (string) $thumbnail
             );
 
-            return redirect('/upload_file')->with([
-                'original_url' => Storage::disk('minio')->url('uploads/' . $fileName),
-                'thumbnail_url' => Storage::disk('minio')->url('thumbnails/' . $fileName),
-            ]);
+            return redirect('/upload_file');
     }
         
     
