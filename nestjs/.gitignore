@@ -1,11 +1,7 @@
 # compiled output
-/nestjs/dist
-/nestjs/node_modules
-/nestjs/build
-
-/todo-client/dist
-/todo-client/node_modules
-/todo-client/build
+/dist
+/node_modules
+/build
 
 # Logs
 logs
