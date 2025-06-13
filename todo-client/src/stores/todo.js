@@ -6,7 +6,8 @@ export const useTodoStore = defineStore("todo", {
   }),
 
   getters: {
-    countTodos: (state) => state.todos.length,
+    countTodos: (state) => 
+      state.todos.filter((todo) => todo.completedAt === null).length,
   },
 
   actions: {
