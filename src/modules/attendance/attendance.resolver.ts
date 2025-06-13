@@ -31,14 +31,69 @@ export class AttendanceResolver {
   @Query('countAttendanceByClass')
   countAttendanceByClass(@Args('className') className: string) {
     const studentsInClass = this.attendances.filter((a) =>
-      this.students.some((s) => s.id === a.student_id && s.class === className),
+      a.student_id == this.students.filter( s => a.student_id == s.id && s.class == className)[0].id
     );
-    return studentsInClass.length;
+    let P = 0;
+    let AP = 0;
+    let L = 0;
+    let A = 0;
+
+    studentsInClass.map( at =>{
+      if(at.status == 'P'){
+          P++;
+      }
+      else if(at.status == 'AP'){
+          AP++;
+      }
+      else if(at.status == 'L'){
+          L++;
+      }
+      else if(at.status == 'A'){
+          A++;
+      }
+    })
+
+    const total = P + AP + L + A;
+    return {
+      P,
+      AP,
+      L,
+      A,
+      total
+    };
   }
 
   @Query('countAttendanceByStudent')
   countAttendanceByStudent(@Args('studentId') studentId: number) {
-    return this.attendances.filter((a) => a.student_id === studentId).length;
+    const studentAttendance = this.attendances.filter((s) => s.student_id === studentId );
+    let P = 0;
+    let AP = 0;
+    let L = 0;
+    let A = 0;
+
+    studentAttendance.map( at =>{
+      if(at.status == 'P'){
+          P++;
+      }
+      else if(at.status == 'AP'){
+          AP++;
+      }
+      else if(at.status == 'L'){
+          L++;
+      }
+      else if(at.status == 'A'){
+          A++;
+      }
+    })
+
+    const total = P + AP + L + A;
+    return {
+      P,
+      AP,
+      L,
+      A,
+      total
+    };
   }
 
   @Mutation('removeAttendance')

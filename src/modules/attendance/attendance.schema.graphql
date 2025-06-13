@@ -12,9 +12,17 @@ type Attendance {
   marker: String!
 }
 
+type AttendanceReturnStatuses {
+  P: Int!
+  AP: Int!
+  L: Int!
+  A: Int!
+  total: Int!
+}
+
 type Query {
-  countAttendanceByClass(className: String!): Int!
-  countAttendanceByStudent(studentId: ID!): Int!
+  countAttendanceByClass(className: String!): AttendanceReturnStatuses
+  countAttendanceByStudent(studentId: ID!): AttendanceReturnStatuses
 }
 
 type Mutation {
